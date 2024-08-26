@@ -2,7 +2,8 @@ package com.example.uber.entities;
 
 import com.example.uber.entities.enums.Role;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package com.example.uber.exceptions;
+package com.example.uber.repositories;
 
 import com.example.uber.entities.Rider;
 import org.springframework.data.jpa.repository.JpaRepository;
