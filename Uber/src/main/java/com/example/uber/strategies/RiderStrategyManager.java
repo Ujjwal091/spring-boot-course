@@ -30,10 +30,12 @@ public class RiderStrategyManager {
         LocalTime surgeEndTime = LocalTime.of(21, 0);
         LocalTime currentTime = LocalTime.now();
 
-        if (currentTime.isAfter(surgeStartTime) && currentTime.isBefore(surgeEndTime)) {
-            return rideFareSurgePricingStrategy;
-        }
+        boolean isSurgeTime = currentTime.isAfter(surgeStartTime) && currentTime.isBefore(surgeEndTime);
 
-        return rideFareDefaultFareCalculationStrategy;
+        if(isSurgeTime) {
+            return rideFareSurgePricingStrategy;
+        } else {
+            return rideFareDefaultFareCalculationStrategy;
+        }
     }
 }

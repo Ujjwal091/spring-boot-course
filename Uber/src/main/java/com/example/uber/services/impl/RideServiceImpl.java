@@ -1,9 +1,9 @@
 package com.example.uber.services.impl;
 
-import com.example.uber.dto.RideRequestDto;
 import com.example.uber.entities.Driver;
 import com.example.uber.entities.Ride;
 import com.example.uber.entities.RideRequest;
+import com.example.uber.entities.Rider;
 import com.example.uber.entities.enums.RideRequestStatus;
 import com.example.uber.entities.enums.RideStatus;
 import com.example.uber.exceptions.ResourceNotFoundException;
@@ -34,11 +34,6 @@ public class RideServiceImpl implements RideService {
     }
 
     @Override
-    public void matchWithDrivers(RideRequestDto rideRequestDto) {
-
-    }
-
-    @Override
     public Ride createNewRide(RideRequest rideRequest, Driver driver) {
         rideRequest.setRideRequestStatus(RideRequestStatus.CONFIRM);
         Ride ride = modelMapper.map(rideRequest, Ride.class);
@@ -52,19 +47,19 @@ public class RideServiceImpl implements RideService {
     }
 
     @Override
-    public Ride updateRide(Ride ride, RideStatus rideStatus) {
+    public Ride updateRideStatus(Ride ride, RideStatus rideStatus) {
         ride.setRideStatus(rideStatus);
         return rideRepository.save(ride);
     }
 
     @Override
-    public Page<Ride> getAllRidesOfRider(Long riderId, PageRequest pageRequest) {
-        return null;
+    public Page<Ride> getAllRidesOfRider(Rider rider, PageRequest pageRequest) {
+        return rideRepository.findByRiderId(rider.getId(), pageRequest);
     }
 
     @Override
-    public Page<Ride> getAllRidesOfDriver(Long driverId, PageRequest pageRequest) {
-        return null;
+    public Page<Ride> getAllRidesOfDriver(Driver driver, PageRequest pageRequest) {
+        return rideRepository.findByDriverId(driver.getId(), pageRequest);
     }
 
     private String generateOTP() {

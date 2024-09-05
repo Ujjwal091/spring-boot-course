@@ -4,14 +4,14 @@ import com.example.uber.dto.DriverDto;
 import com.example.uber.dto.RideDto;
 import com.example.uber.dto.RiderDto;
 import com.example.uber.entities.Driver;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 public interface DriverService {
 
     RideDto acceptRide(Long rideRequestId);
 
-    RiderDto cancelRider(Long rideId);
+    RideDto cancelRide(Long rideId);
 
     RideDto startRide(Long rideId, String otp);
 
@@ -21,8 +21,11 @@ public interface DriverService {
 
     DriverDto getMyProfile();
 
-    List<RiderDto> getAllMyRiders();
+    Page<RideDto> getAllMyRides(PageRequest pageRequest);
 
     Driver getCurrentDriver();
 
+    Driver updateDriverAvailability(Driver driver, boolean isAvailable);
+
+    Driver createNewDriver(Driver driver);
 }

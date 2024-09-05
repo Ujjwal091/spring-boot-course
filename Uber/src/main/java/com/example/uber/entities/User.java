@@ -10,7 +10,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_user", indexes = {
+        @Index(name = "idx_user_email", columnList = "email")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
