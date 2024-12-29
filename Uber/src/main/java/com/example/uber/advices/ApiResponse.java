@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ApiResponse<T> {
+    // @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private LocalDateTime timestamp;
     private T data;
     private ApiError error;

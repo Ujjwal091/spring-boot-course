@@ -18,9 +18,13 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void processPayment(Ride ride) {
-        Payment payment = paymentRepository.findByRide(ride)
+        Payment payment = paymentRepository
+                .findByRide(ride)
                 .orElseThrow(() -> new ResourceNotFoundException("Payment not found for ride with id: " + ride.getId()));
-        paymentStrategyManager.paymentStrategy(payment.getPaymentMethod()).processPayment(payment);
+
+        paymentStrategyManager
+                .paymentStrategy(payment.getPaymentMethod())
+                .processPayment(payment);
     }
 
     @Override

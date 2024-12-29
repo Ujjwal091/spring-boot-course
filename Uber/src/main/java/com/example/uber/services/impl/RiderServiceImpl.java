@@ -47,7 +47,6 @@ public class RiderServiceImpl implements RiderService {
         rideRequest.setFare(fare);
         rideRequest.setRider(getCurrentRider());
 
-        System.out.println(rideRequestDto);
         RideRequest savedRideRequest = rideRequestRepository.save(rideRequest);
 
         riderStrategyManager.driverMatchingStrategy(getCurrentRider().getRating()).findMatchingDriver(rideRequest);
@@ -80,12 +79,12 @@ public class RiderServiceImpl implements RiderService {
         Ride ride = rideService.getRideById(rideId);
         Rider rider = getCurrentRider();
 
-        if(!rider.equals(ride.getRider())) {
+        if (!rider.equals(ride.getRider())) {
             throw new RuntimeException("Rider is not the owner of this Ride");
         }
 
-        if(!ride.getRideStatus().equals(RideStatus.ENDED)) {
-            throw new RuntimeException("Ride status is not Ended hence cannot start rating, status: "+ride.getRideStatus());
+        if (!ride.getRideStatus().equals(RideStatus.ENDED)) {
+            throw new RuntimeException("Ride status is not Ended hence cannot start rating, status: " + ride.getRideStatus());
         }
 
         return ratingService.rateDriver(ride, rating);
@@ -100,7 +99,9 @@ public class RiderServiceImpl implements RiderService {
     @Override
     public Page<RideDto> getAllMyRides(PageRequest pageRequest) {
         Rider rider = getCurrentRider();
-        return rideService.getAllRidesOfRider(rider, pageRequest).map(ride -> modelMapper.map(ride, RideDto.class));
+        return rideService
+                .getAllRidesOfRider(rider, pageRequest)
+                .map(ride -> modelMapper.map(ride, RideDto.class));
     }
 
     @Override

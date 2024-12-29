@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -21,8 +21,8 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    UserDto signup(@RequestBody @Valid SignupDto signupDto) {
-        return authService.signup(signupDto);
+    ResponseEntity<UserDto> signup(@RequestBody @Valid SignupDto signupDto) {
+        return new ResponseEntity<>(authService.signup(signupDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/onBoardNewDriver/{userId}")

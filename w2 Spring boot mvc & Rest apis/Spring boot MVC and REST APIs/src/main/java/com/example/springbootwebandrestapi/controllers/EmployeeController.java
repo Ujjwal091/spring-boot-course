@@ -21,7 +21,6 @@ public class EmployeeController {
 //        return "Secret message: asdfal@#$DASD";
 //    }
 
-
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
@@ -31,14 +30,11 @@ public class EmployeeController {
     @GetMapping(path = "/{employeeId}")
     public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employeeId") Long id) {
         Optional<EmployeeDTO> employeeDTO = employeeService.getEmployeeById(id);
-        return employeeDTO
-                .map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
+        return employeeDTO.map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1)).orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
     }
 
     @GetMapping
-    public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@RequestParam(required = false, name = "inputAge") Integer age,
-                                                             @RequestParam(required = false) String sortBy) {
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@RequestParam(required = false, name = "inputAge") Integer age, @RequestParam(required = false) String sortBy) {
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
@@ -62,8 +58,7 @@ public class EmployeeController {
     }
 
     @PatchMapping(path = "/{employeeId}")
-    public ResponseEntity<EmployeeDTO> updatePartialEmployeeById(@RequestBody Map<String, Object> updates,
-                                                                 @PathVariable Long employeeId) {
+    public ResponseEntity<EmployeeDTO> updatePartialEmployeeById(@RequestBody Map<String, Object> updates, @PathVariable Long employeeId) {
         EmployeeDTO employeeDTO = employeeService.updatePartialEmployeeById(employeeId, updates);
         if (employeeDTO == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(employeeDTO);

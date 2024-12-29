@@ -32,7 +32,7 @@ public class RiderStrategyManager {
 
         boolean isSurgeTime = currentTime.isAfter(surgeStartTime) && currentTime.isBefore(surgeEndTime);
 
-        if(isSurgeTime) {
+        if (isSurgeTime) {
             return rideFareSurgePricingStrategy;
         } else {
             return rideFareDefaultFareCalculationStrategy;

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class DistanceServiceOSRMImp implements DistanceService {
-    private static final String OSRM_API = "http://router.project-osrm.org/route/v1/driving/";
+    private static final String OSRM_API = "https://router.project-osrm.org/route/v1/driving/";
 
     @Override
     public double calculateDistance(Point source, Point destination) {
@@ -24,7 +24,7 @@ public class DistanceServiceOSRMImp implements DistanceService {
                     .retrieve()
                     .body(OSRMResponseDto.class);
 
-            return osrmResponseDto.getRoutes().getFirst().getDistance() / 10_000;
+            return osrmResponseDto.getRoutes().getFirst().getDistance() / 10_000.00;
         } catch (Exception e) {
             throw new RuntimeException("Error getting distance from OSRM " + e.getMessage());
         }
@@ -33,7 +33,6 @@ public class DistanceServiceOSRMImp implements DistanceService {
     @Data
     static class OSRMResponseDto {
         private List<OSRMRoute> routes;
-
     }
 
     @Data

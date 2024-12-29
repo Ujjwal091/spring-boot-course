@@ -1,9 +1,6 @@
 package com.example.uber.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import org.locationtech.jts.geom.Point;
 
@@ -15,6 +12,7 @@ import org.locationtech.jts.geom.Point;
 @Builder
 public class Driver {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double rating;
 

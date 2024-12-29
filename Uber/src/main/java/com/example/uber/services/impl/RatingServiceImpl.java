@@ -29,10 +29,11 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public DriverDto rateDriver(Ride ride, Integer rating) {
         Driver driver = ride.getDriver();
-        Rating ratingObj = ratingRepository.findByRide(ride)
-                .orElseThrow(() -> new ResourceNotFoundException("Rating not found for ride with id: "+ride.getId()));
+        Rating ratingObj = ratingRepository
+                .findByRide(ride)
+                .orElseThrow(() -> new ResourceNotFoundException("Rating not found for ride with id: " + ride.getId()));
 
-        if(ratingObj.getDriverRating() != null)
+        if (ratingObj.getDriverRating() != null)
             throw new RuntimeConflictException("Driver has already been rated, cannot rate again");
 
         ratingObj.setDriverRating(rating);
@@ -53,8 +54,8 @@ public class RatingServiceImpl implements RatingService {
     public RiderDto rateRider(Ride ride, Integer rating) {
         Rider rider = ride.getRider();
         Rating ratingObj = ratingRepository.findByRide(ride)
-                .orElseThrow(() -> new ResourceNotFoundException("Rating not found for ride with id: "+ride.getId()));
-        if(ratingObj.getRiderRating() != null)
+                .orElseThrow(() -> new ResourceNotFoundException("Rating not found for ride with id: " + ride.getId()));
+        if (ratingObj.getRiderRating() != null)
             throw new RuntimeConflictException("Rider has already been rated, cannot rate again");
 
         ratingObj.setRiderRating(rating);

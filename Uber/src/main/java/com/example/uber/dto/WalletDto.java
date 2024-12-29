@@ -1,6 +1,5 @@
 package com.example.uber.dto;
 
-import com.example.uber.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

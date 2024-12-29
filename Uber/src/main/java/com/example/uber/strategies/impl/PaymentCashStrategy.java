@@ -2,7 +2,6 @@ package com.example.uber.strategies.impl;
 
 import com.example.uber.entities.Driver;
 import com.example.uber.entities.Payment;
-import com.example.uber.entities.Wallet;
 import com.example.uber.entities.enums.PaymentStatus;
 import com.example.uber.entities.enums.TransactionMethod;
 import com.example.uber.repositories.PaymentRepository;

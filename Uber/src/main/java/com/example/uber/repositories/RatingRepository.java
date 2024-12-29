@@ -1,7 +1,6 @@
 package com.example.uber.repositories;
 
 
-
 import com.example.uber.entities.Driver;
 import com.example.uber.entities.Rating;
 import com.example.uber.entities.Ride;
@@ -13,6 +12,7 @@ import java.util.Optional;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     List<Rating> findByRider(Rider rider);
+
     List<Rating> findByDriver(Driver driver);
 
     Optional<Rating> findByRide(Ride ride);

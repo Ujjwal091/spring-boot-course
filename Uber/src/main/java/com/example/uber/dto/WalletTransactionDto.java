@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class WalletTransactionDto {
-    private  Long id;
+    private Long id;
     private Double amount;
     private TransactionType transactionType;
     private TransactionMethod transactionMethod;

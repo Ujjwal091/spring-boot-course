@@ -76,6 +76,7 @@ public class DriverServiceImpl implements DriverService {
     public RideDto startRide(Long rideId, String otp) {
         Ride ride = rideService.getRideById(rideId);
         Driver driver = getCurrentDriver();
+
         if (!driver.equals(ride.getDriver())) {
             throw new RuntimeException("Driver can not start Ride as he has not accepted it");
         }
@@ -103,12 +104,12 @@ public class DriverServiceImpl implements DriverService {
         Ride ride = rideService.getRideById(rideId);
         Driver driver = getCurrentDriver();
 
-        if(!driver.equals(ride.getDriver())) {
+        if (!driver.equals(ride.getDriver())) {
             throw new RuntimeException("Driver cannot start a ride as he has not accepted it earlier");
         }
 
-        if(!ride.getRideStatus().equals(RideStatus.ONGOING)) {
-            throw new RuntimeException("Ride status is not ONGOING hence cannot be ended, status: "+ride.getRideStatus());
+        if (!ride.getRideStatus().equals(RideStatus.ONGOING)) {
+            throw new RuntimeException("Ride status is not ONGOING hence cannot be ended, status: " + ride.getRideStatus());
         }
 
         ride.setEndedAt(LocalDateTime.now());
@@ -125,12 +126,12 @@ public class DriverServiceImpl implements DriverService {
         Ride ride = rideService.getRideById(rideId);
         Driver driver = getCurrentDriver();
 
-        if(!driver.equals(ride.getDriver())) {
+        if (!driver.equals(ride.getDriver())) {
             throw new RuntimeException("Driver is not the owner of this Ride");
         }
 
-        if(!ride.getRideStatus().equals(RideStatus.ENDED)) {
-            throw new RuntimeException("Ride status is not Ended hence cannot start rating, status: "+ride.getRideStatus());
+        if (!ride.getRideStatus().equals(RideStatus.ENDED)) {
+            throw new RuntimeException("Ride status is not Ended hence cannot start rating, status: " + ride.getRideStatus());
         }
 
         return ratingService.rateRider(ride, rating);
@@ -145,7 +146,9 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Page<RideDto> getAllMyRides(PageRequest pageRequest) {
         Driver driver = getCurrentDriver();
-        return rideService.getAllRidesOfDriver(driver, pageRequest).map(ride -> modelMapper.map(ride, RideDto.class));
+        return rideService
+                .getAllRidesOfDriver(driver, pageRequest)
+                .map(ride -> modelMapper.map(ride, RideDto.class));
     }
 
     @Override
