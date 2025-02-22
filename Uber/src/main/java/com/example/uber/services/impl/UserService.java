@@ -22,6 +22,7 @@ public final class UserService implements UserDetailsService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + username));
     }
 
+    
     public User getUserById(Long id) {
         return userRepository
                 .findById(id)
